@@ -5,6 +5,12 @@ Template Post Type: post
 */
 
 the_post();
+
+// This template was originally written under the assumption that the post's
+// title would correspond to the original publish date of the Provost Update.
+// Here, we make sure the post title actually corresponds to a date.
+$pubdate = strtotime( $post->post_title );
+$pubdate = ( $pubdate !== false ) ? date( 'l, F j, Y', $pubdate ) : '';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -48,7 +54,7 @@ table, td, tr { border-collapse:collapse; margin:0; padding:0; vertical-align:to
 				<tr>
 					<td colspan="2" style="background-color: #fffae4;" id="title">
 						<h1>Provost's Update</h1>
-						<div class="date"><?php echo date('l, F j, Y', strtotime( $post->post_title ) ); ?></div>
+						<div class="date"><?php echo $pubdate; ?></div>
 					</td>
 				</tr>
 				<tr><td colspan="2">

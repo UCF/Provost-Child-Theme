@@ -5,6 +5,12 @@ Template Post Type: post
 */
 
 the_post();
+
+// This template was originally written under the assumption that the post's
+// title would correspond to the original publish date of the Provost Update.
+// Here, we make sure the post title actually corresponds to a date.
+$pubdate = strtotime( $post->post_title );
+$pubdate = ( $pubdate !== false ) ? date( 'l, F j, Y', $pubdate ) : '';
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <!-- saved from url=(0095)http://provostoffice.cmail5.com/T/ViewEmail/y/2B24D1ADF41A7698/3639B018851473CFC68C6A341B5D209E -->
@@ -65,7 +71,7 @@ cellPadding=0 width=500 align=center>
 	  height=72>
 
 <br>
-&nbsp;&nbsp; <font size="1"><?php echo date( 'l, F j, Y', strtotime( $post->post_title ) ); ?></font>
+&nbsp;&nbsp; <font size="1"><?php echo $pubdate; ?></font>
 
 
 
